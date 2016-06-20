@@ -8,6 +8,8 @@ class Collection extends React.Component {
   }
 
   render() {
+    const {className} = this.props;
+
     let classes = {
       collection: true,
       'with-header': !!this.props.header
@@ -19,7 +21,7 @@ class Collection extends React.Component {
       }
     });
     return (
-      <C className={cx(classes)}>
+      <C className={cx(classes, className)}>
         {this.props.header ? this.renderHeader() : null}
         {this.props.children}
       </C>
