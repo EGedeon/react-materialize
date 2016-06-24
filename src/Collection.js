@@ -16,7 +16,7 @@ class Collection extends React.Component {
     };
     let C = 'ul';
     React.Children.forEach(this.props.children, child => {
-      if (child && child.props && child.props.href) {
+      if (child && child.props.href) {
         C = 'div';
       }
     });
