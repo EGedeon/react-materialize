@@ -74,6 +74,7 @@ class Tabs extends React.Component {
         </Col>
         {
           React.Children.map(children, (child, idx) => {
+            let {title, tabWidth, className, active, disabled} = child.props;
             return active || selected === idx ? 
               <Col id={'tab_' + idx} s={12} key={'tab' + idx}>child.props.children</Col> : 
               null
