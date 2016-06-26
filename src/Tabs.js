@@ -15,6 +15,12 @@ class Tabs extends React.Component {
     if (typeof $ !== 'undefined') {
       $(this.tabsEl).tabs()
     }
+    React.Children.map(children, (child, idx) => {
+      let {active} = child.props;
+      if(active){
+        this.setState({selected: idx})
+      }
+    }.bind(this)
   }
 
   componentWillMount(){
@@ -60,8 +66,8 @@ class Tabs extends React.Component {
                   <li className={cx(classes, className)} key={idx}>
                     <a 
                       href={target} 
-                      ref={active || selected === idx ? 'active' : ''} 
-                      className={active || selected === idx ? 'active' : ''}
+                      ref={selected === idx ? 'active' : ''} 
+                      className={selected === idx ? 'active' : ''}
                       {...disabled ? {} : {onClick : this._onSelect.bind(this, idx)}}>
                       {title}
                     </a>
@@ -75,8 +81,8 @@ class Tabs extends React.Component {
         {
           React.Children.map(children, (child, idx) => {
             let {title, tabWidth, className, active, disabled} = child.props;
-            return active || selected === idx ? 
-              <Col id={'tab_' + idx} s={12} key={'tab' + idx}>child.props.children</Col> : 
+            return selected === idx ? 
+              <Col id={'tab_' + idx} s={12} key={'tab' + idx}>{child.props.children}</Col> : 
               null
             //return <Col id={'tab_' + idx} s={12} key={'tab' + idx}>{child.props.children}</Col>;
           })
