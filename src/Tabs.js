@@ -44,7 +44,7 @@ class Tabs extends React.Component {
                 let target = '#tab_' + idx;
                 return (
                   <li className={cx(classes, className)} key={idx}>
-                    <a href={target} className={active || defaultValue === idx ? 'active' : ''} className={active || defaultValue === idx ? 'active' : ''}
+                    <a href={target} ref={active || defaultValue === idx ? 'active' : ''} className={active || defaultValue === idx ? 'active' : ''}
                      {...disabled ? {} : {onClick : this._onSelect.bind(this, idx)}}>{title}</a>
                   </li>
                 );
