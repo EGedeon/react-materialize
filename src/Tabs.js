@@ -6,6 +6,11 @@ import Col from './Col';
 
 class Tabs extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {selected: this.props.defaultValue};
+  }
+
   componentDidMount() {
     if (typeof $ !== 'undefined') {
       $(this.tabsEl).tabs()
@@ -16,15 +21,18 @@ class Tabs extends React.Component {
     if (this.props.hasOwnProperty('onChange')) {
       this.props.onChange(idx, e)
     }
+    this.setState({selected: idx})
   }
 
   renderIndicator(){
     console.log(this.refs.active)
+    let {offsetLeft, offsetWidth} = this.refs.active.offsetParent;
     return <span className="indicator"></span> 
   }
 
   render() {
-    let {children, className, defaultValue, ...props} = this.props;
+    let {children, className, ...props} = this.props;
+    const {selected} = this.state;
     return (
       <Row>
         <Col s={12}>
@@ -44,8 +52,13 @@ class Tabs extends React.Component {
                 let target = '#tab_' + idx;
                 return (
                   <li className={cx(classes, className)} key={idx}>
-                    <a href={target} ref={active || defaultValue === idx ? 'active' : ''} className={active || defaultValue === idx ? 'active' : ''}
-                     {...disabled ? {} : {onClick : this._onSelect.bind(this, idx)}}>{title}</a>
+                    <a 
+                      href={target} 
+                      ref={active || selected === idx ? 'active' : ''} 
+                      className={active || selected === idx ? 'active' : ''}
+                      {...disabled ? {} : {onClick : this._onSelect.bind(this, idx)}}>
+                      {title}
+                    </a>
                   </li>
                 );
               })
