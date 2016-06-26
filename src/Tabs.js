@@ -15,12 +15,11 @@ class Tabs extends React.Component {
     if (typeof $ !== 'undefined') {
       $(this.tabsEl).tabs()
     }
-    React.Children.map(children, (child, idx) => {
+    React.Children.map(children, function(child, idx) {
       let {active} = child.props;
-      if(active){
-        this.setState({selected: idx})
-      }
-    }.bind(this)
+      if(active) this.setState({selected: idx})
+      
+      }.bind(this))
   }
 
   componentWillMount(){
