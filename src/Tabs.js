@@ -18,6 +18,11 @@ class Tabs extends React.Component {
     }
   }
 
+  renderIndicator(){
+    console.log(this.refs.active)
+    return <span className="indicator"></span> 
+  }
+
   render() {
     let {children, className, defaultValue, ...props} = this.props;
     return (
@@ -39,13 +44,14 @@ class Tabs extends React.Component {
                 let target = '#tab_' + idx;
                 return (
                   <li className={cx(classes, className)} key={idx}>
-                    <a href={target} className={active || defaultValue === idx ? 'active' : ''}
+                    <a href={target} className={active || defaultValue === idx ? 'active' : ''} className={active || defaultValue === idx ? 'active' : ''}
                      {...disabled ? {} : {onClick : this._onSelect.bind(this, idx)}}>{title}</a>
                   </li>
                 );
               })
             }
           </ul>
+          {this.renderIndicator()}
         </Col>
         {
           React.Children.map(children, (child, idx) => {
