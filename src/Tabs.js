@@ -17,6 +17,10 @@ class Tabs extends React.Component {
     }
   }
 
+  componentWillMount(){
+    this.forceUpdate()
+  }
+
   _onSelect(idx, e) {
     if (this.props.hasOwnProperty('onChange')) {
       this.props.onChange(idx, e)
@@ -65,8 +69,8 @@ class Tabs extends React.Component {
                 );
               })
             }
-          </ul>
-          {this.renderIndicator()}
+            {this.renderIndicator()}
+          </ul>          
         </Col>
         {
           React.Children.map(children, (child, idx) => {
