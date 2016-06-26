@@ -32,7 +32,7 @@ class Tabs extends React.Component {
     console.log(this.refs.active)
     if(this.refs.active){
       let {offsetLeft, offsetWidth} = this.refs.active.offsetParent;
-      return <span className="indicator"></span> 
+      return <span className="indicator" style={{width: offsetWidth, left: offsetLeft}}></span> 
     }
   }
 
@@ -74,7 +74,10 @@ class Tabs extends React.Component {
         </Col>
         {
           React.Children.map(children, (child, idx) => {
-            return <Col id={'tab_' + idx} s={12} key={'tab' + idx}>{child.props.children}</Col>;
+            return active || selected === idx ? 
+              <Col id={'tab_' + idx} s={12} key={'tab' + idx}>child.props.children</Col> : 
+              null
+            //return <Col id={'tab_' + idx} s={12} key={'tab' + idx}>{child.props.children}</Col>;
           })
         }
       </Row>
