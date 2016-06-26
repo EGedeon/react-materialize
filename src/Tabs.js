@@ -13,7 +13,7 @@ class Tabs extends React.Component {
 
   componentDidMount() {
     if (typeof $ !== 'undefined') {
-      $(this.tabsEl).tabs()
+      //$(this.tabsEl).tabs()
     }
   }
 
