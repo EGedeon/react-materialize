@@ -26,8 +26,10 @@ class Tabs extends React.Component {
 
   renderIndicator(){
     console.log(this.refs.active)
-    let {offsetLeft, offsetWidth} = this.refs.active.offsetParent;
-    return <span className="indicator"></span> 
+    if(this.refs.active){
+      let {offsetLeft, offsetWidth} = this.refs.active.offsetParent;
+      return <span className="indicator"></span> 
+    }
   }
 
   render() {
