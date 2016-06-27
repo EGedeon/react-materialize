@@ -42,8 +42,14 @@ class CollapsibleItem extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (typeof nextProps !== 'undefined') {
+      this.setState({expanded: nextProps.expanded})
+    }
+  }
+
   renderBody() {
-    if (!this.state.expanded && !this.props.expanded) return;
+    if (!this.state.expanded) return;
 
     const style = {display: 'block'};
     return (
