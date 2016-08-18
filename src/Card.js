@@ -60,6 +60,10 @@ class Card extends React.Component {
 
 Card.propTypes = {
   title: React.PropTypes.string,
+
+  subTitle: React.PropTypes.string,
+  caption: React.PropTypes.element,
+
   textClassName: React.PropTypes.string,
   reveal: React.PropTypes.element,
   header: React.PropTypes.element,
