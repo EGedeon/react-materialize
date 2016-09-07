@@ -9,7 +9,7 @@ class Card extends React.Component {
   }
 
   render() {
-    let {title, header, className, textClassName, actions, reveal, children, ...props} = this.props;
+    let {title, header, footer, className, textClassName, actions, reveal, children, ...props} = this.props;
     let classes = { card: true };
     return (
       <div {...props}
@@ -19,6 +19,7 @@ class Card extends React.Component {
           {title ? this.renderTitle(title, reveal) : null}
           <div>{children}</div>
         </div>
+          {footer}
         {this.renderReveal(title, reveal)}
         {actions ? this.renderAction(actions) : null}
       </div>
@@ -67,6 +68,7 @@ Card.propTypes = {
   textClassName: React.PropTypes.string,
   reveal: React.PropTypes.element,
   header: React.PropTypes.element,
+  footer: React.PropTypes.element,
   // The buttons to be displayed at the action area
   actions: React.PropTypes.arrayOf(React.PropTypes.element)
 };
