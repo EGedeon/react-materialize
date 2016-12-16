@@ -78,10 +78,10 @@ class Button extends Component {
   }
 
   renderIcon () {
-    const { icon } = this.props;
+    const { icon, iconAlign } = this.props;
     if (!icon) return;
 
-    return <Icon>{icon}</Icon>;
+    return <Icon align={iconAlign}>{icon}</Icon>;
   }
 }
 
