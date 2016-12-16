@@ -1,40 +1,49 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import Col from './Col';
 import Icon from './Icon';
 
-class Navbar extends React.Component {
-  constructor(props) {
+class Navbar extends Component {
+  constructor (props) {
     super(props);
     this.renderSideNav = this.renderSideNav.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if ($ !== undefined) {
       $('.button-collapse').sideNav();
     }
   }
 
-  renderSideNav() {
+  renderSideNav () {
     return (
-      <ul id="nav-mobile" className="side-nav">
+      <ul id='nav-mobile' className='side-nav'>
         {this.props.children}
       </ul>
     );
   }
 
-  render() {
-    let {brand, className, ...props} = this.props;
+  render () {
+    const {
+      brand,
+      className,
+      left,
+      right,
+      ...other
+    } = this.props;
+
     let classes = {
-      right: this.props.right,
+      right: right,
       'hide-on-med-and-down': true
     };
+
     let brandClasses = {
       'brand-logo': true,
-      right: this.props.left
+      right: left
     };
+
     return (
-      <nav className={className}>
+      <nav {...other} className={className}>
         <div className='nav-wrapper'>
           <Col s={12}>
             <a href='/' className={cx(brandClasses)}>{brand}</a>
@@ -53,11 +62,11 @@ class Navbar extends React.Component {
 }
 
 Navbar.propTypes = {
-  brand: React.PropTypes.node,
-  children: React.PropTypes.node,
-  className: React.PropTypes.string,
-  left: React.PropTypes.bool,
-  right: React.PropTypes.bool
+  brand: PropTypes.node,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  left: PropTypes.bool,
+  right: PropTypes.bool
 };
 
 export default Navbar;

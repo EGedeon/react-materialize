@@ -1,34 +1,37 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 
-class Collection extends React.Component {
-  constructor(props) {
+class Collection extends Component {
+  constructor (props) {
     super(props);
     this.renderHeader = this.renderHeader.bind(this);
   }
 
-  render() {
-    const {className} = this.props;
+  render () {
+    const {
+      children,
+      header
+    } = this.props;
 
     let classes = {
       collection: true,
-      'with-header': !!this.props.header
+      'with-header': !!header
     };
     let C = 'ul';
-    React.Children.forEach(this.props.children, child => {
-      if (child && child.props.href) {
+    React.Children.forEach(children, child => {
+      if (child.props.href) {
         C = 'div';
       }
     });
     return (
-      <C className={cx(classes, className)}>
-        {this.props.header ? this.renderHeader() : null}
-        {this.props.children}
+      <C className={cx(classes)}>
+        {header ? this.renderHeader() : null}
+        {children}
       </C>
     );
   }
 
-  renderHeader() {
+  renderHeader () {
     let header;
     if (this.props.header) {
       if (React.isValidElement(this.props.header)) {
@@ -42,7 +45,8 @@ class Collection extends React.Component {
 }
 
 Collection.propTypes = {
-  header: React.PropTypes.node,
+  children: PropTypes.node,
+  header: PropTypes.node
 };
 
 export default Collection;

@@ -1,39 +1,40 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Overlay from './Overlay';
 import idgen from './idgen';
 
 class OverlayTrigger extends Overlay {
-  constructor(props) {
+  constructor (props) {
     super(props);
-    this.state = {isOverlayShown: false};
     this.showOverlay = this.showOverlay.bind(this);
     this.renderOverlay = this.renderOverlay.bind(this);
-    this.overlayID = `overlay_${idgen()}`;
+    this.overlayID = this.props.overlay.props.id || `overlay_${idgen()}`;
   }
 
-  render() {
-    let {overlay, children, ...props} = this.props;
-    let child = React.Children.only(children);
+  render () {
+    const child = React.Children.only(this.props.children);
+
     return React.cloneElement(
-      child,
-      {onClick: this.showOverlay}
+      child, {
+        onClick: this.showOverlay
+      }
     );
   }
 
-  renderOverlay() {
-    return React.cloneElement(this.props.overlay, {onRequestHide: this.toggle, id: this.overlayID});
+  renderOverlay () {
+    return React.cloneElement(this.props.overlay, {
+      id: this.overlayID
+    });
   }
 
-  showOverlay() {
-    $('#' + this.overlayID).openModal();
+  showOverlay (e) {
+    e.preventDefault();
+    $(`#${this.overlayID}`).modal(this.props.modalOptions).modal('open');
   }
 }
 
 OverlayTrigger.propTypes = {
-  /**
-   *
-   */
-  overlay: React.PropTypes.node
+  modalOptions: PropTypes.object,
+  overlay: PropTypes.node
 };
 
 export default OverlayTrigger;

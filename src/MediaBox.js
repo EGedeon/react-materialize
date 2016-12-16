@@ -1,24 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import cx from 'classnames';
 
-// Material design implementation of the Lightbox plugin
-class MediaBox extends React.Component {
-  render() {
-    let {src, caption,  ...props} = this.props;
-    return (
-      <img className="materialboxed" data-caption={caption} {...props} src={src} />
-    );
-  }
-}
+const MediaBox = ({ src, className, caption, ...props }) =>
+  <img className={cx('materialboxed', className)} data-caption={caption} src={src} {...props} />;
 
 MediaBox.propTypes = {
+  className: PropTypes.string,
   /**
    * The caption shown below the image when opened
    */
-  caption: React.PropTypes.string,
+  caption: PropTypes.string,
   /**
    * The path to the image
    */
-  src: React.PropTypes.string.isRequired
+  src: PropTypes.string.isRequired
 };
 
 export default MediaBox;
